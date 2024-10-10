@@ -128,3 +128,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+models/db_conf.js 
+#exo Gitignore this file localDb is going to be ignored
+localDb.js 
