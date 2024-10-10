@@ -31,6 +31,7 @@ router.post('/login', (req, res, next) => {
         }
     }
     else {
+        console.log("conflictBranch");
         console.log("bad user");
         req.session.errors = "Utilisateur inconnu";
         res.redirect('/users');
