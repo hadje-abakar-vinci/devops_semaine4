@@ -59,7 +59,19 @@ router.post('/add', (req, res, next) => {
     if (!validator.isAlphanumeric(req.body.userName)) errors.push("Le nom doit contenir uniquement des caractères alphanumériques");
     if (!validator.isLength(req.body.userFirstname)) errors.push("Le prénom doit avoir 3 caractères minimum");
     // firstname : alphanumeric + '-'
+
+    if (!validator.isAlphanumeric(req.body.userFirstname, "fr-FR", { ignore: '-' })) errors.push("Le prénom doit contenir uniquement des caractères alphanumériques");
+    if (!validator.isEmail(req.body.userEmail)) errors.push("L'email entré n'est pas correct !");
+    if (!validator.isStrongPassword(req.body.userPassword, { minLength: 2, minLowercase: 0, minUppercase: 0, minNumbers: 0, minSymbols: 0, returnScore: false })) errors.push("Le mot de passe n'et pas assez fort : 2 caractères minimum, ... !");
+     validateDataUser(req, errors, res);
+});
+
+module.exports = router;
+
+function validateDataUser(req, errors, res) {
+
     validateUserAlphanumeric(req, errors);
+
     if (req.body.userPassword != req.body.userPasswordConfirmation) errors.push("Les mot de passes ne correspondent pas");
     if (User.find(req.body.userEmail)) errors.push("Email/Utilisateur déjà présent en DB");
     if (errors.length == 0) {
@@ -75,9 +87,7 @@ router.post('/add', (req, res, next) => {
         req.session.errors = errors;
         res.redirect('/users/register');
     }
-});
-
-module.exports = router;
+}
 
 function validateUserAlphanumeric(req, errors) {
     if (!validator.isAlphanumeric(req.body.userFirstname, "fr-FR", { ignore: '-' })) errors.push("Le prénom doit contenir uniquement des caractères alphanumériques");
