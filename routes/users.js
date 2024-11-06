@@ -122,4 +122,4 @@ function manageWrongPassword(req, res) {
     console.log("bad password");
     req.session.errors = "Mot de passe incorrect";
     res.redirect('/users');
-
+}
