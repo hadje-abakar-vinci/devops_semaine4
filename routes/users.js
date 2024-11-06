@@ -1,3 +1,5 @@
+// quand on fait un hotfix, le problème vient de la branche master et develop ou juste de la branche master ?
+// quand on fait une pull-request, et que qq d'autre fait un commentaire est-ce qu'on peut directement changer le code sur github ?
 const express = require('express');
 const router = express.Router();
 
@@ -9,6 +11,17 @@ const validator = require('validator');
 
 /* form login / password */
 router.get('/', (req, res, next) => {
+
+
+
+
+
+
+
+
+
+
+    
     console.log("USERS INDEX");
     if (req.session.login) {
         res.redirect("/members");
